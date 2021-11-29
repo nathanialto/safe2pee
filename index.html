@@ -139,17 +139,20 @@
             border-radius: 5px;
             display: grid;
             grid-template-columns: 85vw;
-            grid-template-rows: 7.5vh 40vh 35vh;
+            grid-template-rows: 35vh 7.5vh 35vh;
             row-gap: 1em;
             grid-template-areas: 
-               "a"
                "c"
+               "a"
                "b"
                ;
             opacity: 1;
             position: absolute;
         }
-            #map{height: 38vh;}
+            #map{
+                height: 33vh;
+                display: fixed;
+            }
             #reset-bar{
                 display: none;
             }
