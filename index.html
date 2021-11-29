@@ -123,8 +123,10 @@
             color: white;
         }
         button:hover{
-            background-color: white;
+            background-color: transparent;
             color: #FF7171;
+            border-color:#ff7171 ;
+            border-style: solid;
         }
         @media (max-width: 900px){
             .container{
@@ -156,8 +158,8 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
         <script>
-        let latitude = 42.061622619628906;
-        let longitude = -87.67689514160156;
+        let latitude = 42.0566723;
+        let longitude = -87.6750685;
         let mymap;
         const search = (term) => {
             
@@ -170,7 +172,7 @@
                 <div id="searched"></div>
                 <div class="border" id="map"></div>
             </div>`
-            mymap = L.map('map').setView([latitude, longitude], 18);
+            mymap = L.map('map').setView([latitude, longitude], 14);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -290,7 +292,7 @@
 </head>
 <body>
 <main>
-    <div id="header"><p>nbn</p></div>
+    <div id="header"><p>where2pee</p></div>
     <div id="whitespace">
         <div id="title"><h1>Where2Pee<h1></div>
         <button onclick="search()" id="search"><h2>search</h2></button>
