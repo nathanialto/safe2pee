@@ -11,12 +11,15 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
 
     <style>
+        *{
+            font-style: italic;
+        }
         html{
             background-color: #FFE5BD;
         }
         #header{
             background-color: #5E8BFE;
-            position: absolute;
+            position: fixed;
             top:0;
             left: 0;
             width: 100vw;
@@ -130,13 +133,13 @@
         }
         @media (max-width: 900px){
             .container{
-            margin-top: 1em;
+            margin-top: 0em;
             margin-right: 5vw;
             margin-left: 5vw;
             border-radius: 5px;
             display: grid;
             grid-template-columns: 85vw;
-            grid-template-rows: 8.5vh 40vh 30vh;
+            grid-template-rows: 7.5vh 40vh 35vh;
             row-gap: 1em;
             grid-template-areas: 
                "a"
@@ -146,12 +149,24 @@
             opacity: 1;
             position: absolute;
         }
-        #map{height: 40vh;}
-        #reset-bar{
-            display: none;
-        }
-        .container button{ width: 85vw;  }
-        
+            #map{height: 38vh;}
+            #reset-bar{
+                display: none;
+            }
+            .container button{ 
+                width: 85vw;}
+            #header{height: 7vh;}
+            #header p{
+                margin-top: 2vh;
+                font-size: 1.2em;
+            }
+            #location-bar{
+                height: 7vh;
+            }
+            #location-bar p{
+                margin: 0;
+                padding: 0;
+            }
         }
         </style>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
