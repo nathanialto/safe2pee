@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Where2Pee</title>
+    <title>Safe2Pee</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"> 
@@ -39,13 +39,13 @@
         }
         .container{
             width: 50vw;
-            margin-top: 10vh;
+            margin-top: 5vh;
             margin-right: 10vw;
             margin-left: 10vw;
             border-radius: 5px;
             display: grid;
             grid-template-columns: 35vw 10vw 35vw;
-            grid-template-rows: 10vh 5vh 55vh;
+            grid-template-rows: 8vh 5vh 60vh;
             grid-template-areas: 
                "a . c"
                ". . c"
@@ -68,12 +68,16 @@
         }
         #reset-bar{grid-area: d;}
         #location-bar{grid-area: a;}
+        #location-bar p{
+            margin: 0;
+        }
+
         #searched{
             grid-area: b;
             overflow-y: auto;}
         #map{
             grid-area: c;
-            height: 68vh;
+            height: 70vh;
             border-color: #5E8BFE;}
         #search-bar p{display: inline-block}
         .container button{
@@ -131,6 +135,14 @@
             border-color:#ff7171 ;
             border-style: solid;
         }
+        a{
+                text-decoration: none;
+            }
+        #info{
+            font-family: sans-serif;
+            text-align: center;
+            }
+            
         @media (max-width: 900px){
             .container{
             margin-top: 0em;
@@ -139,7 +151,7 @@
             border-radius: 5px;
             display: grid;
             grid-template-columns: 85vw;
-            grid-template-rows: 35vh 7.5vh 35vh;
+            grid-template-rows: 40vh 7.5vh 35vh;
             row-gap: 1em;
             grid-template-areas: 
                "c"
@@ -150,21 +162,21 @@
             position: absolute;
         }
             #map{
-                height: 33vh;
-                display: fixed;
+                height: 38vh;
+                margin-top: 1vh;
             }
             #reset-bar{
                 display: none;
             }
             .container button{ 
                 width: 85vw;}
-            #header{height: 7vh;}
+            #header{height: 9vh;}
             #header p{
-                margin-top: 2vh;
+                margin-top: 2.5vh;
                 font-size: 1.2em;
             }
             #location-bar{
-                height: 7vh;
+                height: 7.5vh;
             }
             #location-bar p{
                 margin: 0;
@@ -274,8 +286,6 @@
                     // mymap.panTo([latitude, longitude])
                     console.log(latitude, longitude)
                     marker.openPopup();
-
-
                 }
 
         function show(elem){
@@ -284,39 +294,45 @@
         }
 
         function makeLocations() {
-            for (i=0; i < 44; i++){
+            for (i=0; i < locations.length; i++){
                 let marker = L.marker([locations[i].latitude,  locations[i].longitude]).addTo(mymap);
-                marker.bindPopup(`<b>${locations[i].space}- ${locations[i].address}</b><br>${locations[i].room}`)
+                marker.bindPopup(`<b>${locations[i].space} - ${locations[i].address}</b><br>${locations[i].room}<br>ada accesible: ${locations[i].ada}`)
                 let searched = document.querySelector('#searched')
-                // onclick="locate(${[locations[i].latitude, locations[i].longitude]})"
-                let newItem = `<div onclick="locate(${[locations[i].latitude, locations[i].longitude]})" class="border locations">
-                <p>${locations[i].space}</p>
+                let newItem = document.createElement("div");
+                searched.appendChild(newItem);
+                newItem.innerHTML = `<div class="border locations"><p>${locations[i].space}</p>
                 <p class="hidden">${locations[i].address}<br>
                 ${locations[i].room}<br>
                 ada accesible: ${locations[i].ada}</p></div>`;
-                searched.innerHTML += newItem;
-                // locate.apply(locations[i], this.latitude, this.longitude)
-                // document.querySelector('#searched').appendChild(newElem)
-                
-                function locate(latitude, longitude){
-                    mymap.flyTo(L.latLng(latitude, longitude), 17)
-                    // mymap.panTo([latitude, longitude])
-                    console.log(latitude, longitude)
+
+                newItem.onclick = function(){
                     marker.openPopup();
-
-
+                    mymap.flyTo(L.latLng(locations[i].latitude,  locations[i].longitude), 17);
                 }
-
             } 
         }
         </script>
 </head>
 <body>
 <main>
-    <div id="header"><p>where2pee</p></div>
+    <div id="header"><a href="index.html"><p>safe2pee</p></a></div>
     <div id="whitespace">
-        <div id="title"><h1>Where2Pee<h1></div>
+        <div id="title"><h1>safe2pee<h1></div>
         <button onclick="search()" id="search"><h2>search</h2></button>
+        <div id=info>
+            <p>The search for bathroom that is accessible can be difficult! Use this link
+            to find an all-gender or accessible bathroom near you!
+            </p>
+            <p>
+            Designed and developed by Nathanial Ortiz for NBN Interactive.
+            </p>
+            <a>
+            Data sourced from Queer@NU.
+            </a>
+            <a>
+            Back to northbynorthwestern.com
+            </a>
+    </div>
     </div>
 
 </main>
