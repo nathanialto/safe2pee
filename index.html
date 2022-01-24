@@ -4,8 +4,7 @@
     <title>Safe2Pee</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>   
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -29,7 +28,7 @@
         }
         #header p{
             color: white;
-            font-family: 'Open Sans', sans-serif;
+            font-family: sans-serif;
             font-weight: 600;
             font-size: 1.5em;
             text-align: center;
@@ -55,7 +54,7 @@
             position: absolute;
         }
         .container p{
-            font-family: 'Open Sans', sans-serif;
+            font-family: sans-serif;
             font-weight: 600;
             font-size: 1rem;
             text-align: center; 
@@ -89,15 +88,15 @@
             width: 35vw;
         }
         h1{
-            font-family: 'Open Sans', sans-serif;
-            font-weight: 600;
+            font-family:sans-serif;
+            font-weight: 700;
             font-size: 3em;
             text-align: center;
             font-style: italic;
             color: #5E8BFE;
         }
         #title{
-            margin-top: 45vh;
+            margin-top: 40vh;
             transform: translate(0, -50%);
         }
         #search{
@@ -122,6 +121,7 @@
             color: white;
         }
         button{
+            font-family: sans-serif;
             border-radius: 14px;
             width: 20em;
             border-width: 5px;
@@ -140,9 +140,54 @@
             }
         #info{
             font-family: sans-serif;
-            text-align: center;
+            text-align: right;
+            position: absolute;
+            border: 4px solid #FF7171 ;
+            border-radius: 12px;
+            padding: 0 10px ;
+            position: absolute;
+            bottom: 3vh;
+            right:  10vh;
+            margin-left: 10vw;
+            display: none;
+            background-color: #FF7171;
+            color: white;
             }
             
+        #blurb{
+            font-family: sans-serif;
+            text-align: center;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-bottom: 5vh;
+            color:#292929;
+            font-weight: bold;
+            font-style: normal;
+            font-size: 1em;
+        }
+        #i{
+            width: fit-content;
+            position: absolute;
+            bottom: 5vh;
+            right: 5vh;
+        }
+        #footer{
+            background-color: #5E8BFE;
+            position: fixed;
+            bottom:0;
+            left: 0;
+            width: 100vw;
+            margin: 0;
+            height: 10vh;  
+        }
+        #footer p{
+            color: white;
+            font-family: sans-serif;
+            font-weight: 600;
+            font-size: 1em;
+            text-align: center;
+        }
+
         @media (max-width: 900px){
             .container{
             margin-top: 0em;
@@ -208,7 +253,7 @@
             mymap = L.map('map').setView([latitude, longitude], 14);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
+            maxZoom: 19,
             id: 'mapbox/streets-v11',
             tileSize: 512,
             zoomOffset: -1,
@@ -288,9 +333,12 @@
                     marker.openPopup();
                 }
 
-        function show(elem){
-
-            document.getElementById(elem).style.display = block;
+        function toggleVisibility(elem){
+            if (document.querySelector(elem).style.display == "block"){
+            document.querySelector(elem).style.display = "none";}
+            else {
+            document.querySelector(elem).style.display = "block"
+            }
         }
 
         function makeLocations() {
@@ -309,8 +357,11 @@
                 ada accesible: ${locations[i].ada}</p></div>`;
 
                 newItem.onclick = function(){
-                    marker.openPopup();
-                    mymap.flyTo(L.latLng(locations[i].latitude,  locations[i].longitude), 17);
+                    marker.openPopup()
+                    .autoPan = "True";
+                    console.log(locations[i].latitude);
+
+                    mymap.flyTo([locations[i].latitude,  locations[i].longitude], 17);
                 }
             } 
         }
@@ -321,21 +372,16 @@
     <div id="header"><a href="index.html"><p>safe2pee</p></a></div>
     <div id="whitespace">
         <div id="title"><h1>safe2pee<h1></div>
+        
         <button onclick="search()" id="search"><h2>search</h2></button>
-        <div id=info>
-            <p>The search for bathroom that is accessible can be difficult! Use this link
-            to find an all-gender or accessible bathroom near you!
-            </p>
-            <p>
-            Designed and developed by Nathanial Ortiz for NBN Interactive.
-            </p>
-            <a>
-            Data sourced from Queer@NU.
-            </a>
-            <a>
-            Back to northbynorthwestern.com
-            </a>
-    </div>
+        <br><br><p id="blurb">The search for bathroom that is accessible can be difficult! Use this link
+            to find an all-gender or accessible bathroom near you!</p>
+        </p>
+
+        <div id="footer"><p>Designed and developed by Nathanial Ortiz for NBN Interactive.
+            Data sourced from Queer@NU.</p>
+        </div>
+    <!-- <button onclick="toggleVisibility('#info')" id="i">i</button> -->
     </div>
 
 </main>
